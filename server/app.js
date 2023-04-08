@@ -1,21 +1,30 @@
+import { Server as SocketServer } from 'socket.io'
 import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
+import http from 'http'
 
-import { PORT } from './config.js'
+import fnSocket from './sockets.js'
 
 const app = express()
+const server = http.createServer(app)
+const io = new SocketServer(server, {
+  cors: {
+    origin: '*'
+  }
+})
 
-app.set('port', PORT)
+fnSocket(io)
 
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
+// Route Not Found
 app.use((req, res) => {
   res.status(404).json({
     error: 'Rout Not Found'
   })
 })
 
-export default app
+export default server

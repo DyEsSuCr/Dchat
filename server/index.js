@@ -1,11 +1,12 @@
 import { conectionSequelize } from './database/db.js'
-import app from './app.js'
+import { PORT } from './config.js'
+import server from './app.js'
 
 const main = async () => {
   try {
     await conectionSequelize.sync({ force: false })
-    app.listen(app.get('port'), () => {
-      console.log(`🆗✅🆗 Server on port ${app.get('port')} 🆗✅🆗`)
+    server.listen(PORT, () => {
+      console.log(`🆗✅🆗 Server on port ${PORT} 🆗✅🆗`)
     })
   } catch (err) {
     console.error(`🛑⛔ Not connection database ❗${err}❗ ⛔🛑`)
