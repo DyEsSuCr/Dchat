@@ -2,6 +2,8 @@ import { conectionSequelize } from './database/db.js'
 import { PORT } from './config.js'
 import server from './app.js'
 
+import './models/users.js'
+
 const main = async () => {
   try {
     await conectionSequelize.sync({ force: false })
