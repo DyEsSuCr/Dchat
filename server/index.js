@@ -2,7 +2,7 @@ import { conectionSequelize } from './database/db.js'
 import { PORT } from './config.js'
 import server from './app.js'
 
-import './models/users.js'
+import './models/Asociations.js'
 
 const main = async () => {
   try {

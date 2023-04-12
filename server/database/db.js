@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize'
+import { DIALECT, HOST } from '../config.js'
 
 export const conectionSequelize = new Sequelize({
-  dialect: 'sqlite',
-  host: './db.sqlite3'
+  dialect: DIALECT,
+  host: HOST
 })
