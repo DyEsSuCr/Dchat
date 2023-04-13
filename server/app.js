@@ -4,7 +4,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import http from 'http'
 
-import fnSocket from './sockets.js'
+import fnSocket from './sockets/sockets.js'
 import authRoute from './routes/auth.js'
 
 const app = express()
