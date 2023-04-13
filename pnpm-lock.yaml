@@ -5,6 +5,7 @@ specifiers:
   cors: 2.8.5
   dotenv: 16.0.3
   express: 4.18.2
+  express-validator: 6.15.0
   jsonwebtoken: 9.0.0
   morgan: 1.10.0
   nodemon: 2.0.22
@@ -18,6 +19,7 @@ dependencies:
   cors: 2.8.5
   dotenv: 16.0.3
   express: 4.18.2
+  express-validator: 6.15.0
   jsonwebtoken: 9.0.0
   morgan: 1.10.0
   sequelize: 6.30.0_sqlite3@5.1.6
@@ -1095,6 +1097,14 @@ packages:
   /etag/1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /express-validator/6.15.0:
+    resolution: {integrity: sha512-r05VYoBL3i2pswuehoFSy+uM8NBuVaY7avp5qrYjQBDzagx2Z5A77FZqPT8/gNLF3HopWkIzaTFaC4JysWXLqg==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      lodash: 4.17.21
+      validator: 13.9.0
     dev: false
 
   /express/4.18.2:

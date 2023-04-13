@@ -1,10 +1,8 @@
+
 import { User } from '../models/Users.js'
-import { compareSync } from 'bcrypt'
 
 export const register = async (req, res) => {
   const { username, password } = req.body
-
-  if (!username || !password) return res.json({ meessage: 'todos los campos son requeridos' })
 
   try {
     const user = await User.create({
@@ -19,9 +17,7 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-  const { username, password } = req.body
-
-  if (!username || !password) return res.json({ meessage: 'todos los campos son requeridos' })
+  const { username } = req.body
 
   try {
     const user = await User.findOne({
@@ -29,12 +25,6 @@ export const login = async (req, res) => {
         username
       }
     })
-
-    if (!user) return res.status(404).json({ message: 'user not found' })
-
-    const match = compareSync(password, user.password)
-
-    if (!match) return res.status(400).json({ message: 'password not match' })
 
     res.status(200).json(user)
   } catch (err) {
