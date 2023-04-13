@@ -1,5 +1,5 @@
-
 import { User } from '../models/Users.js'
+import { generetaToken } from '../utils/generateToken.js'
 
 export const register = async (req, res) => {
   const { username, password } = req.body
@@ -10,7 +10,11 @@ export const register = async (req, res) => {
       password
     })
 
-    res.status(201).json(user)
+    const { id, username: uname } = user
+
+    const token = generetaToken({ id, username: uname })
+
+    res.status(201).json(token)
   } catch (err) {
     res.status(404).json(err)
   }
@@ -21,12 +25,15 @@ export const login = async (req, res) => {
 
   try {
     const user = await User.findOne({
-      where: {
-        username
-      }
+      where: { username },
+      attributes: ['id', 'username']
     })
 
-    res.status(200).json(user)
+    const { id, username: uname } = user
+
+    const token = generetaToken({ id, username: uname })
+
+    res.status(200).json(token)
   } catch (err) {
     res.status(404).json(err)
   }
