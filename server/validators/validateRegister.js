@@ -7,7 +7,10 @@ export const validateRegister = [
     .exists()
     .not()
     .isEmpty()
-    .isLength({ min: 4, max: 20 })
+    .isLength({ min: 4 })
+    .withMessage('Minimum 8 characters')
+    .isLength({ max: 20 })
+    .withMessage('Maximun 20 characters')
     .custom(async (value) => {
       const usernameExists = await User.findOne({ where: { username: value } })
 

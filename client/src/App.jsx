@@ -13,22 +13,16 @@ export function App () {
           ? (
             <>
               <Login />
-              <button className='m-3' type='submit'>
-                Send
-              </button>
               <button className='m-3' onClick={() => setToggle(!toggle)}>
-                Register?
+                Register
               </button>
             </>
             )
           : (
             <>
               <Register />
-              <button className='m-3' type='submit'>
-                Send
-              </button>
               <button className='m-3' onClick={() => setToggle(!toggle)}>
-                Login?
+                Login
               </button>
             </>
             )
