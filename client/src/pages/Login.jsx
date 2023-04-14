@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Form } from '../components/Form'
 import { authentication } from '../services/authentication'
 
-export function Login () {
+export function Login ({ setToken }) {
   const [form, setForm] = useState({})
   const [error, setError] = useState(null)
 
@@ -20,6 +20,9 @@ export function Login () {
     const token = await authentication('login', form)
 
     if (token.msg) return setError(token.msg)
+
+    window.localStorage.setItem('token', JSON.stringify(token))
+    setToken(token)
   }
 
   return (

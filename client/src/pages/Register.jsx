@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Form } from '../components/Form'
 import { authentication } from '../services/authentication'
 
-export function Register () {
+export function Register ({ setToken }) {
   const [form, setForm] = useState({})
   const [error, setError] = useState(null)
 
@@ -21,6 +21,9 @@ export function Register () {
     const token = await authentication('register', data)
 
     if (token.msg) return setError(token.msg)
+
+    window.localStorage.setItem('token', JSON.stringify(token))
+    setToken(token)
   }
 
   return (
