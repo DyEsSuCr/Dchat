@@ -8,7 +8,9 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fronted": "cd client && npm run dev",
+    "backend": "cd api && npm run dev",
+    "dev": "concurrently \"npm run backend\" \"npm run fronted\""
   },
   "author": "DyEsSuCr",
   "license": "GPL",
@@ -17,5 +19,8 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "dependencies": {
+    "concurrently": "8.0.1"
   }
 }
