@@ -1,4 +1,4 @@
-import { verify } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import { SECRET } from '../config.js'
 
 export const userExtractor = async (req, res, next) => {
@@ -9,7 +9,7 @@ export const userExtractor = async (req, res, next) => {
     token = authorization.substring(7)
   }
 
-  const decodedToken = verify(token, SECRET)
+  const decodedToken = jwt.verify(token, SECRET)
 
   if (!token || !decodedToken) return res.status(401).json({ erro: 'token missing o invalid' })
 
