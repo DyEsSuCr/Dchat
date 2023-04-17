@@ -1,21 +1,15 @@
-import { useState, useEffect } from 'react'
 import { Chat } from './pages/Chat'
 import { RenderForm } from './components/RenderForm'
+import { useLocalStorage } from './hooks/useLocalStorage'
 
 export function App () {
-  const [token, setToken] = useState(null)
-  const isLocalToken = JSON.parse(window.localStorage.getItem('token'))
-
-  useEffect(() => {
-    if (!isLocalToken) window.localStorage.setItem('token', JSON.stringify(token))
-    else setToken(isLocalToken)
-  }, [])
+  const { item: token, setItem } = useLocalStorage('token')
 
   return (
     <div className='max-w-7xl mx-auto p-8 text-center flex flex-col justify-center items-center min-h-screen'>
       {
         !token
-          ? <RenderForm setToken={setToken} />
+          ? <RenderForm setToken={setItem} />
           : <Chat />
       }
     </div>
