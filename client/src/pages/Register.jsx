@@ -22,7 +22,6 @@ export function Register ({ setToken }) {
 
     if (token.msg) return setError(token.msg)
 
-    window.localStorage.setItem('token', JSON.stringify(token))
     setToken(token)
   }
 
