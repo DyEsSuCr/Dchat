@@ -5,7 +5,6 @@ import cors from 'cors'
 import http from 'http'
 
 import fnSocket from './sockets/sockets.js'
-import authRoute from './routes/auth.js'
 import usersRoute from './routes/users.js'
 
 const app = express()
@@ -22,7 +21,6 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-app.use('/api', authRoute)
 app.use('/api', usersRoute)
 
 // Route Not Found

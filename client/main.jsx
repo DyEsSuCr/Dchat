@@ -1,7 +1,11 @@
 import { createRoot } from 'react-dom/client'
+import { Auth0Provider } from '@auth0/auth0-react'
 import { App } from './src/App'
+import { client, domain } from './src/services/config'
 import './style.css'
 
 createRoot(document.getElementById('app')).render(
-  <App />
+  <Auth0Provider domain={domain} clientId={client}>
+    <App />
+  </Auth0Provider>
 )
