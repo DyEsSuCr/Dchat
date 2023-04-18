@@ -1,6 +1,6 @@
 import { User } from '../models/Users.js'
 
-export const getOneUser = async (req, res) => {
+export const findOneUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.userId, {
       attributes: {
