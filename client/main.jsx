@@ -5,7 +5,7 @@ import { client, domain } from './src/services/config'
 import './style.css'
 
 createRoot(document.getElementById('app')).render(
-  <Auth0Provider domain={domain} clientId={client}>
+  <Auth0Provider domain={domain} clientId={client} redirectUri={window.location.origin}>
     <App />
   </Auth0Provider>
 )
