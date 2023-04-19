@@ -1,7 +1,8 @@
 export function Board () {
   return (
-    <div>
-      <h1>Board</h1>
+    <div className='bg-[#272b35] flex gap-4'>
+      <input type='text' placeholder='Send' className='w-full' />
+      <button type='submit'>Send</button>
     </div>
   )
 }

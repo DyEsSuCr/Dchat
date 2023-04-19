@@ -1,12 +1,15 @@
-import { useAuth0 } from '@auth0/auth0-react'
+import { Board } from '../components/Board'
+import { Messages } from '../components/Messages'
+import { Sidebar } from '../components/Sidebar'
 
 export function Chat () {
-  const { user, logout } = useAuth0()
-
   return (
-    <div className='flex'>
-      <h1>{user.nickname}</h1>
-      <button onClick={logout}>Logout</button>
-    </div>
+    <>
+      <Sidebar />
+      <div className='flex flex-col h-screen w-[70%] bg-[#3e404d] p-4 shadow-[#494b58] shadow-xl'>
+        <Messages />
+        <Board />
+      </div>
+    </>
   )
 }
