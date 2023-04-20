@@ -5,15 +5,11 @@ import cors from 'cors'
 import http from 'http'
 
 import fnSocket from './sockets/sockets.js'
-import usersRoute from './routes/users.js'
+import messagesRoute from './routes/messages.js'
 
 const app = express()
 const server = http.createServer(app)
-const io = new SocketServer(server, {
-  cors: {
-    origin: '*'
-  }
-})
+const io = new SocketServer(server, { cors: { origin: '*' } })
 
 fnSocket(io)
 
@@ -21,7 +17,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-app.use('/api', usersRoute)
+app.use('/api', messagesRoute)
 
 // Route Not Found
 app.use((req, res) => {

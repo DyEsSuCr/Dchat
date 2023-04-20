@@ -7,7 +7,7 @@ export const User = conectionSequelize.define('users', {
     primaryKey: true,
     defaultValue: DataTypes.UUIDV4
   },
-  username: {
+  user: {
     type: DataTypes.STRING(60),
     allowNull: false,
     unique: true

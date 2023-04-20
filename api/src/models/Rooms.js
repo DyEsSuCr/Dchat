@@ -1,4 +1,3 @@
-
 import { DataTypes } from 'sequelize'
 import { conectionSequelize } from '../database/db.js'
 
