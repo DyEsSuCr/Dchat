@@ -17,9 +17,20 @@ export const sendMessage = async (req, res) => {
   }
 }
 
-export const getMessages = async (req, res) => {
+export const getMessagesUserRoom = async (req, res) => {
+  const { idUser, idRoom } = req.body
+
   try {
-    res.status(200).json({ messages: 'messages' })
+    const messages = await Message.findAll({
+      where: {
+        idUser,
+        idRoom
+      }
+    })
+
+    if (messages.length <= 0) return res.status(200).json({ message: '0 messages' })
+
+    res.status(200).json(messages)
   } catch (err) {
     res.status(400).json(err)
   }

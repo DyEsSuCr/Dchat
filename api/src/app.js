@@ -6,6 +6,7 @@ import http from 'http'
 
 import fnSocket from './sockets/sockets.js'
 import messagesRoute from './routes/messages.js'
+import usersRoute from './routes/users.js'
 
 const app = express()
 const server = http.createServer(app)
@@ -17,7 +18,10 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-app.use('/api', messagesRoute)
+app.use('/api', [
+  messagesRoute,
+  usersRoute
+])
 
 // Route Not Found
 app.use((req, res) => {
