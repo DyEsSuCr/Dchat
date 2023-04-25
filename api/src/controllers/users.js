@@ -1,4 +1,5 @@
 import { User } from '../models/Users.js'
+import { response } from '../utils/response.js'
 
 export const postCreateUser = async (req, res) => {
   const { user } = req.body
@@ -6,25 +7,24 @@ export const postCreateUser = async (req, res) => {
   try {
     const userExist = await User.findOne({ where: { user } })
 
-    if (userExist) return res.status(409).json({ message: 'user already exists' })
-
+    if (userExist) return response(res, 409, { message: 'user already exists' })
     const newUser = await User.create({ user })
 
-    res.status(201).json(newUser)
+    response(res, 201, newUser)
   } catch (err) {
-    res.status(400).json(err)
+    response(res, 400, err)
   }
 }
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (_, res) => {
   try {
     const users = await User.findAll()
 
-    if (users.length <= 0) return res.status(200).json({ message: '0 users' })
+    if (users.length <= 0) return response(res, 200, { message: '0 users' })
 
-    res.status(200).json(users)
+    response(res, 200, users)
   } catch (err) {
-    res.status(400).json(err)
+    response(res, 400, err)
   }
 }
 
@@ -34,10 +34,10 @@ export const getOneUser = async (req, res) => {
   try {
     const users = await User.findOne({ where: { user } })
 
-    if (users.length <= 0) return res.status(200).json({ message: '0 users' })
+    if (users) return response(res, 404, { message: 'user not found' })
 
-    res.status(200).json(users)
+    response(res, 200, users)
   } catch (err) {
-    res.status(400).json(err)
+    response(res, 400, err)
   }
 }

@@ -1,6 +1,7 @@
 import { Message } from '../models/Messages.js'
 import { User } from '../models/Users.js'
 import { Room } from '../models/Rooms.js'
+import { response } from '../utils/response.js'
 
 export const sendMessage = async (req, res) => {
   try {
@@ -11,9 +12,9 @@ export const sendMessage = async (req, res) => {
     await user.setRooms(room.id)
     await room.setUsers(user.id)
 
-    res.status(200).json({ messsage, user, room })
+    response(res, 200, { messsage, user, room })
   } catch (err) {
-    res.status(400).json(err)
+    response(res, 400, err)
   }
 }
 
@@ -28,10 +29,10 @@ export const getMessagesUserRoom = async (req, res) => {
       }
     })
 
-    if (messages.length <= 0) return res.status(200).json({ message: '0 messages' })
+    if (messages.length <= 0) return response(res, 200, { message: '0 messages' })
 
-    res.status(200).json(messages)
+    response(res, 200, messages)
   } catch (err) {
-    res.status(400).json(err)
+    response(res, 400, err)
   }
 }
