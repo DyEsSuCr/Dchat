@@ -1,4 +1,5 @@
 import { User } from '../models/Users.js'
+import { getUser, getUsers } from '../services/users.js'
 import { response, handleHttp } from '../utils/index.js'
 
 export const postCreateUser = async (req, res) => {
@@ -18,25 +19,20 @@ export const postCreateUser = async (req, res) => {
 
 export const getAllUsers = async (_, res) => {
   try {
-    const users = await User.findAll()
-
-    if (users.length <= 0) return response(res, 200, { message: '0 users' })
-
+    const users = await getUsers()
     response(res, 200, users)
   } catch (err) {
     handleHttp(res, 'getAllUsers', err)
   }
 }
 
-export const getOneUser = async (req, res) => {
-  const { user } = req.params
-
+export const getOneUser = async ({ params }, res) => {
   try {
-    const users = await User.findOne({ where: { user } })
+    const username = params.username
+    const user = await getUser(username)
+    const data = user || 'NOT_FOUND'
 
-    if (users) return response(res, 404, { message: 'user not found' })
-
-    response(res, 200, users)
+    response(res, 200, data)
   } catch (err) {
     handleHttp(res, 'getOneUser', err)
   }
