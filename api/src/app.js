@@ -18,10 +18,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-app.use('/api', [
-  messagesRoute,
-  usersRoute
-])
+app.use('/api/users/', usersRoute)
+app.use('/api/messages/', messagesRoute)
 
 // Route Not Found
 app.use((req, res) => {

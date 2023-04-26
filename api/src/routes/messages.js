@@ -3,7 +3,7 @@ import { sendMessage, getMessagesUserRoom } from '../controllers/messages.js'
 
 const route = Router()
 
-route.post('/messages', sendMessage)
-route.get('/messages', getMessagesUserRoom)
+route.post('/', sendMessage)
+route.get('/', getMessagesUserRoom)
 
 export default route
