@@ -1,7 +1,7 @@
 import { Message } from '../models/Messages.js'
 import { User } from '../models/Users.js'
 import { Room } from '../models/Rooms.js'
-import { response } from '../utils/response.js'
+import { response, handleHttp } from '../utils/index.js'
 
 export const sendMessage = async (req, res) => {
   try {
@@ -14,7 +14,7 @@ export const sendMessage = async (req, res) => {
 
     response(res, 200, { messsage, user, room })
   } catch (err) {
-    response(res, 400, err)
+    handleHttp(res, 'sendMessage', err)
   }
 }
 
@@ -33,6 +33,6 @@ export const getMessagesUserRoom = async (req, res) => {
 
     response(res, 200, messages)
   } catch (err) {
-    response(res, 400, err)
+    handleHttp(res, 'getMessagesUserRoom', err)
   }
 }

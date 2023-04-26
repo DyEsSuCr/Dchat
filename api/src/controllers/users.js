@@ -1,5 +1,5 @@
 import { User } from '../models/Users.js'
-import { response } from '../utils/response.js'
+import { response, handleHttp } from '../utils/index.js'
 
 export const postCreateUser = async (req, res) => {
   const { user } = req.body
@@ -12,7 +12,7 @@ export const postCreateUser = async (req, res) => {
 
     response(res, 201, newUser)
   } catch (err) {
-    response(res, 400, err)
+    handleHttp(res, 'postCreateUser', err)
   }
 }
 
@@ -24,7 +24,7 @@ export const getAllUsers = async (_, res) => {
 
     response(res, 200, users)
   } catch (err) {
-    response(res, 400, err)
+    handleHttp(res, 'getAllUsers', err)
   }
 }
 
@@ -38,6 +38,6 @@ export const getOneUser = async (req, res) => {
 
     response(res, 200, users)
   } catch (err) {
-    response(res, 400, err)
+    handleHttp(res, 'getOneUser', err)
   }
 }
