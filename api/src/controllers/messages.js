@@ -1,36 +1,18 @@
-import { Message } from '../models/Messages.js'
-import { User } from '../models/Users.js'
-import { Room } from '../models/Rooms.js'
+import { postMessage, getMessagesRoom } from '../services/messages.js'
 import { response, handleHttp } from '../utils/index.js'
 
-export const sendMessage = async (req, res) => {
+export const sendMessage = async ({ body }, res) => {
   try {
-    const user = await User.create({ user: req.body.user })
-    const messsage = await Message.create({ message: req.body.message })
-    const room = await Room.create()
-
-    await user.setRooms(room.id)
-    await room.setUsers(user.id)
-
-    response(res, 200, { messsage, user, room })
+    const message = await postMessage(body)
+    response(res, 200, message)
   } catch (err) {
     handleHttp(res, 'sendMessage', err)
   }
 }
 
-export const getMessagesUserRoom = async (req, res) => {
-  const { idUser, idRoom } = req.body
-
+export const getMessagesUserRoom = async ({ body }, res) => {
   try {
-    const messages = await Message.findAll({
-      where: {
-        idUser,
-        idRoom
-      }
-    })
-
-    if (messages.length <= 0) return response(res, 200, { message: '0 messages' })
-
+    const messages = await getMessagesRoom(body)
     response(res, 200, messages)
   } catch (err) {
     handleHttp(res, 'getMessagesUserRoom', err)
