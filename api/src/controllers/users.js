@@ -1,17 +1,10 @@
-import { User } from '../models/Users.js'
-import { getUser, getUsers } from '../services/users.js'
+import { getUser, getUsers, insertUser } from '../services/users.js'
 import { response, handleHttp } from '../utils/index.js'
 
-export const postCreateUser = async (req, res) => {
-  const { user } = req.body
-
+export const postCreateUser = async ({ body }, res) => {
   try {
-    const userExist = await User.findOne({ where: { user } })
-
-    if (userExist) return response(res, 409, { message: 'user already exists' })
-    const newUser = await User.create({ user })
-
-    response(res, 201, newUser)
+    const user = await insertUser(res, body)
+    response(res, 201, user)
   } catch (err) {
     handleHttp(res, 'postCreateUser', err)
   }
