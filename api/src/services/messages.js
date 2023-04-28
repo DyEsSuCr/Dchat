@@ -7,7 +7,7 @@ export const postMessage = async ({ user, message }) => {
   const messsage = await Message.create({ message })
   const room = await Room.create()
 
-  await user.setRooms(room.id)
+  await _user.setRooms(room.id)
   await room.setUsers(_user.id)
 
   return { _user, messsage, room }
