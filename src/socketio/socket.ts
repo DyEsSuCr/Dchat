@@ -6,7 +6,10 @@ class Socket {
   private readonly io: SocketIO.Server
 
   constructor (server: Server) {
-    this.io = new SocketIO.Server(server)
+    this.io = new SocketIO.Server(server, {
+      cors: { origin: '*' }
+    })
+
     this.io.on('connection', async (socket) =>
       await SocketController.connect(socket, this.io)
     )
