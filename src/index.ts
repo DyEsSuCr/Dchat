@@ -13,6 +13,7 @@ class App {
   constructor () {
     this.app = express()
     this.port = config.PORT
+    this.middlewares()
     this.routes()
   }
 
