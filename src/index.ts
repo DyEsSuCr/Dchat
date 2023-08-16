@@ -6,7 +6,7 @@ import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
 
-class Server {
+class App {
   private readonly app: express.Application
   private readonly port: string
 
@@ -28,11 +28,13 @@ class Server {
   }
 
   middlewares () {
+    this.app.disable('x-powered-by')
+
     this.app.use(express.json())
     this.app.use(cors())
     this.app.use(morgan('dev'))
   }
 }
 
-const server = new Server()
-server.start()
+const app = new App()
+app.start()
