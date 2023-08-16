@@ -1,10 +1,10 @@
 import config from '@/config/config'
-import { router } from '@/router'
+import { handleErrorMiddleware } from '@/middlewares/error.handler'
+import { routes } from '@/router'
 
 import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
-import { handleErrorMiddleware } from './middlewares/error.handler'
 
 class Server {
   private readonly app: express.Application
@@ -23,7 +23,7 @@ class Server {
   }
 
   routes () {
-    this.app.use(router)
+    this.app.use('/api', routes)
     this.app.use(handleErrorMiddleware)
   }
 
