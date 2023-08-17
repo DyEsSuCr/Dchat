@@ -1,5 +1,5 @@
 import { responseHandler } from '@/libs/response.handler'
-import { NextFunction, Request, Response } from 'express'
+import { type NextFunction, type Request, type Response } from 'express'
 
 export class HTTPError extends Error {
   statusCode: number
