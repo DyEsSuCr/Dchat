@@ -10,7 +10,6 @@ export class AuthController {
 
       responseHandler(res, 200, { logedUser })
     } catch (err) {
-      console.log(err)
       next(err)
     }
   }
@@ -22,7 +21,6 @@ export class AuthController {
 
       responseHandler(res, 201, { registerUser })
     } catch (err) {
-      console.log(err)
       next(err)
     }
   }
