@@ -1,11 +1,12 @@
+import { type ErrorMessages } from '@/interfaces/error.messages'
 import { responseHandler } from '@/libs/response.handler'
 import { type NextFunction, type Request, type Response } from 'express'
 
 export class HTTPError extends Error {
   statusCode: number
-  message: string
+  message: ErrorMessages
 
-  constructor (statusCode: number, message: string) {
+  constructor (statusCode: number, message: ErrorMessages) {
     super()
     this.statusCode = statusCode
     this.message = message
