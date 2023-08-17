@@ -1,19 +1,29 @@
 import { ModelAuth } from './auth.services'
 import { responseHandler } from '@/libs/response.handler'
-import { type Request, type Response } from 'express'
+import { NextFunction, type Request, type Response } from 'express'
 
 export class AuthController {
-  static async login ({ body }: Request, res: Response) {
-    const { email, password } = body
-    const logedUser = await ModelAuth.login({ email, password })
+  static async login ({ body }: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, password } = body
+      const logedUser = await ModelAuth.login({ email, password })
 
-    responseHandler(res, 200, logedUser)
+      responseHandler(res, 200, { logedUser })
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   }
 
-  static async register ({ body }: Request, res: Response) {
-    const { username, email, password } = body
-    const registerUser = await ModelAuth.register({ username, email, password })
+  static async register ({ body }: Request, res: Response, next: NextFunction) {
+    try {
+      const { username, email, password } = body
+      const registerUser = await ModelAuth.register({ username, email, password })
 
-    responseHandler(res, 201, registerUser)
+      responseHandler(res, 201, { registerUser })
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   }
 }
