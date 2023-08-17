@@ -20,6 +20,6 @@ export const checkJwt = async (req: RequestExt, res: Response, next: NextFunctio
     req.user = user
     next()
   } catch (err) {
-    throw new HTTPError(500, 'JWT_ERROR')
+    console.log(err)
   }
 }
