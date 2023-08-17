@@ -26,7 +26,7 @@ export class App {
   }
 
   routes () {
-    this.app.use('/api', routes)
+    this.app.use(routes)
     this.app.use(handleErrorMiddleware)
   }
 

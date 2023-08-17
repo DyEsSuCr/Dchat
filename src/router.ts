@@ -16,7 +16,7 @@ readdirSync(pathModules).forEach((folder) => {
 
     if (cleanName.endsWith('routes')) {
       void import(`${pathRoute}/${cleanName}`).then((moduleRouter) => {
-        routes.use(`/${cleanName.split('.').shift()}`, moduleRouter.router)
+        routes.use(`/api/${cleanName.split('.').shift()}`, moduleRouter.router)
       })
     }
   })
