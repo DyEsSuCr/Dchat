@@ -7,6 +7,7 @@ import cors from 'cors'
 import express from 'express'
 import { Server } from 'http'
 import morgan from 'morgan'
+import { dbConnect } from './database/mongodb/dbConnect'
 
 export class App {
   private readonly app: express.Application
@@ -42,3 +43,7 @@ export class App {
 const app = new App()
 const server = app.start()
 export const socket = new SocketIO(server)
+
+void (async () => {
+  await dbConnect()
+})()
