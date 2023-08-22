@@ -21,7 +21,6 @@ const UserSchema = new Schema<User>(
     },
     pic: {
       type: String,
-      required: true,
       default: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg'
     },
     isAdmmin: {
