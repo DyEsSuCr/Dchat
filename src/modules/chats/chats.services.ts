@@ -10,7 +10,7 @@ export class ModelChat {
     // UserId param not sent with request
     if (!userId) throw new HTTPError(400, 'ALREADY_USER')
 
-    let isChat = await ChatModel.find({
+    const isChat = await ChatModel.find({
       isGroupChat: false,
       $and: [
         { users: { $elemMatch: { $eq: user?.id } } },
@@ -20,13 +20,13 @@ export class ModelChat {
       .populate('users', '-password')
       .populate('latestMessage')
 
-    isChat = await UserModel.populate(isChat, {
+    const isChatUser = await UserModel.populate(isChat, {
       path: 'latestMessage.sender',
       select: 'name pic email'
     })
 
     // isChat[0]
-    if (isChat.length > 0) throw new HTTPError(400, 'ALREADY_USER')
+    if (isChatUser.length > 0) throw new HTTPError(400, 'ALREADY_USER')
 
     const chatData = {
       chatName: 'sender',
@@ -39,17 +39,18 @@ export class ModelChat {
       'users',
       '-password'
     )
+
     return FullChat
   }
 
   static async fetchChats ({ user }: RequestExt) {
-    let results = await ChatModel.find({ users: { $elemMatch: { $eq: user?.id } } })
+    const chat = await ChatModel.find({ users: { $elemMatch: { $eq: user?.id } } })
       .populate('users', '-password')
       .populate('groupAdmin', '-password')
       .populate('latestMessage')
       .sort({ updatedAt: -1 })
 
-    results = await UserModel.populate(results, {
+    const results = await UserModel.populate(chat, {
       path: 'latestMessage.sender',
       select: 'name pic email'
     })
