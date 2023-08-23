@@ -14,7 +14,7 @@ export const checkJwt = async (req: RequestExt, res: Response, next: NextFunctio
     const decodedToken = verifyToken(authorization.substring(7))
     if (!decodedToken) throw new HTTPError(403, 'INVALID_TOKEN')
 
-    const user = await UserModel.findById(decodedToken)
+    const user = await UserModel.findById(decodedToken).select('-password')
     if (!user) throw new HTTPError(404, 'USER_NOT_FOUND')
 
     req.user = user
