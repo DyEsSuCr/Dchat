@@ -16,7 +16,7 @@ export class MessageController {
   static async allMessages (req: RequestExt, res: Response, next: NextFunction) {
     try {
       const messages = await ModelMessage.allMessages(req)
-      responseHandler(res, 201, messages)
+      responseHandler(res, 200, messages)
     } catch (err) {
       next(err)
     }
