@@ -2,8 +2,12 @@
 
 import api from '@/interceptors/api'
 import { SyntheticEvent, useState } from 'react'
+import { useAuthContext } from '@/hooks/useAuthContext'
+import { useRouter } from 'next/navigation'
 
 export function SigninForm () {
+  const { saveToken } = useAuthContext()
+  const router = useRouter()
   const [values, setValues] = useState({
     email: '',
     password: ''
@@ -22,8 +26,9 @@ export function SigninForm () {
     e.preventDefault()
 
     try {
-      const { data } = await api.post('/auth/signin', values)
-      console.log(data)
+      const { data: { token } } = await api.post('/auth/signin', values)
+      saveToken(token)
+      return router.push('chat')
     } catch (error) {
       console.log(error)
     }

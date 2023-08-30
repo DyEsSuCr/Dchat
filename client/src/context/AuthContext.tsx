@@ -21,6 +21,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
   const saveToken = (token: string) => {
     setAccessToken(token)
+    setIsAuthenticated(true)
     localStorage.setItem('token', JSON.stringify(token))
   }
 
