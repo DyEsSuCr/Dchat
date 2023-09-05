@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuthContext } from '@/hooks/useAuthContext'
+import { useAuthContext } from '@/context/AuthContext'
 import { redirect } from 'next/navigation'
 
 export default function Layout ({ children }: { children: React.ReactNode }) {

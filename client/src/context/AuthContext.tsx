@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 export const AuthContext = createContext({
   isAuthenticated: false,
@@ -52,3 +52,5 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     </AuthContext.Provider>
   )
 }
+
+export const useAuthContext = () => useContext(AuthContext)
